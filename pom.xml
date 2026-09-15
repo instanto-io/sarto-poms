@@ -1,0 +1,58 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>io.instanto</groupId>
+    <artifactId>sarto-org-pom</artifactId>
+    <version>${revision}</version>
+    <relativePath>sarto-org-pom/pom.xml</relativePath>
+  </parent>
+
+  <artifactId>sarto-poms</artifactId>
+  <version>${revision}</version>
+  <packaging>pom</packaging>
+  <name>sarto-poms</name>
+  <description>Reusable POMs for Sarto libraries and Sarto application development frameworks</description>
+
+  <properties>
+    <!-- The authoritative value lives in sarto-org-pom. -->
+    <revision>0.1.0-SNAPSHOT</revision>
+    <maven.compiler.release>21</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <teavm.version>0.15.0</teavm.version>
+    <slf4j.version>2.0.12</slf4j.version>
+    <javafx.version>21.0.5</javafx.version>
+    <javafx.platform>mac-aarch64</javafx.platform>
+    <javafx.build.id>${javafx.platform}</javafx.build.id>
+  </properties>
+
+    <modules>
+        <module>sarto-library-pom</module>
+        <module>sarto-org-pom</module>
+        <module>sarto-java-pom</module>
+        <module>sarto-framework-pom</module>
+        <module>sarto-entity-model-pom</module>
+        <module>sarto-service-pom</module>
+        <module>sarto-app-pom</module>
+        <module>sarto-app-browser-pom</module>
+        <module>sarto-app-cloudflare-pom</module>
+        <module>sarto-app-tomcat-pom</module>
+    </modules>
+
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>3.15.0</version>
+          <configuration>
+            <release>${maven.compiler.release}</release>
+          </configuration>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
+</project>

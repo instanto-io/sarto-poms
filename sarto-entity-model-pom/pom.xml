@@ -1,0 +1,149 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>io.instanto</groupId>
+    <artifactId>sarto-java-pom</artifactId>
+    <version>${revision}</version>
+    <relativePath>../sarto-java-pom/pom.xml</relativePath>
+  </parent>
+
+  <artifactId>sarto-entity-model-pom</artifactId>
+  <packaging>pom</packaging>
+  <name>sarto-entity-model-pom</name>
+  <description>
+    Base POM for reusable managed entity model modules. Enables Sarto entity,
+    observable, automap, entity-provider and configuration-entity generation
+    without adding service RPC generation.
+  </description>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>io.instanto</groupId>
+        <artifactId>sarto-framework-pom</artifactId>
+        <version>${revision}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>io.instanto</groupId>
+        <artifactId>sarto-resources-model</artifactId>
+        <version>${revision}</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <dependencies>
+    <dependency>
+      <groupId>io.instanto</groupId>
+      <artifactId>sarto-api</artifactId>
+      <version>${revision}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.instanto</groupId>
+      <artifactId>sarto-model</artifactId>
+      <version>${sarto-model.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.instanto</groupId>
+      <artifactId>sarto-resources-model</artifactId>
+      <version>${revision}</version>
+    </dependency>
+    <!-- Maven 3 reactor edge; javac activation remains on annotationProcessorPaths. -->
+    <dependency>
+      <groupId>io.instanto</groupId>
+      <artifactId>sarto-annotation-processor</artifactId>
+      <version>${revision}</version>
+      <scope>provided</scope>
+    </dependency>
+    <!-- Generated library factories and bean indexes use the neutral CDI SPI. -->
+    <dependency>
+      <groupId>io.instanto</groupId>
+      <artifactId>sarto-cdi-bootstrap</artifactId>
+      <version>${sarto-cdi.version}</version>
+    </dependency>
+    <!-- Maven 3 reactor edge; javac activation remains on annotationProcessorPaths. -->
+    <dependency>
+      <groupId>io.instanto</groupId>
+      <artifactId>sarto-cdi-annotation-processor</artifactId>
+      <version>${sarto-cdi.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>jakarta.inject</groupId>
+      <artifactId>jakarta.inject-api</artifactId>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>jakarta.annotation</groupId>
+      <artifactId>jakarta.annotation-api</artifactId>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>jakarta.enterprise</groupId>
+      <artifactId>jakarta.enterprise.cdi-api</artifactId>
+      <version>4.1.0</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter</artifactId>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <!-- Make dependency bean indexes visible while compiling reusable modules.
+           The final application still performs the authoritative graph composition. -->
+      <plugin>
+        <groupId>io.instanto</groupId>
+        <artifactId>sarto-cdi-maven-plugin</artifactId>
+        <version>${sarto-cdi.version}</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>aggregate</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.15.0</version>
+        <configuration>
+          <annotationProcessorPaths>
+            <path>
+              <groupId>io.instanto</groupId>
+              <artifactId>sarto-annotation-processor</artifactId>
+              <version>${revision}</version>
+            </path>
+            <path>
+              <groupId>io.instanto</groupId>
+              <artifactId>sarto-cdi-annotation-processor</artifactId>
+              <version>${sarto-cdi.version}</version>
+            </path>
+            <path>
+              <groupId>com.squareup</groupId>
+              <artifactId>javapoet</artifactId>
+              <version>${javapoet.version}</version>
+            </path>
+            <path>
+              <groupId>io.github.classgraph</groupId>
+              <artifactId>classgraph</artifactId>
+              <version>${classgraph.version}</version>
+            </path>
+          </annotationProcessorPaths>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>

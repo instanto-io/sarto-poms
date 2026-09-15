@@ -1,0 +1,84 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>io.instanto</groupId>
+    <artifactId>sarto-app-pom</artifactId>
+    <version>${revision}</version>
+    <relativePath>../sarto-app-pom/pom.xml</relativePath>
+  </parent>
+
+  <artifactId>sarto-app-browser-pom</artifactId>
+  <packaging>pom</packaging>
+  <name>Sarto application parent — browser host</name>
+  <description>
+    Browser-host build for TeaVM applications. Produces reusable static assets
+    under META-INF/resources and a web-classified jar that Spring, Quarkus and
+    Servlet hosts can serve from their own deployment.
+
+    Typical child module declares:
+      &lt;properties&gt;
+        &lt;app.teavm.main.class&gt;com.example.MyApp&lt;/app.teavm.main.class&gt;
+        &lt;app.teavm.target.file&gt;app.js&lt;/app.teavm.target.file&gt;
+      &lt;/properties&gt;
+  </description>
+
+  <properties>
+    <!--
+      Default output location for TeaVM-compiled JS relative to the WAR web root.
+      Override per module if a different path is required.
+    -->
+    <app.teavm.target.directory>${project.build.outputDirectory}/META-INF/resources</app.teavm.target.directory>
+    <app.teavm.bundle.directory>${app.teavm.target.directory}</app.teavm.bundle.directory>
+    <app.teavm.bundle.zip>${project.build.directory}/${project.artifactId}-${project.version}-web.zip</app.teavm.bundle.zip>
+    <app.teavm.phase>none</app.teavm.phase>
+    <teavm.skip>true</teavm.skip>
+  </properties>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>3.5.0</version>
+        <executions>
+          <execution>
+            <id>attach-browser-webjar</id>
+            <phase>package</phase>
+            <goals><goal>jar</goal></goals>
+            <configuration>
+              <classifier>web</classifier>
+              <includes>
+                <include>META-INF/resources/**</include>
+              </includes>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+    <pluginManagement>
+      <plugins>
+        <!--
+          WAR plugin — failOnMissingWebXml=false so modules do not need a
+          web.xml; the TeaVM output directory is included as a web resource.
+        -->
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-war-plugin</artifactId>
+          <version>3.5.1</version>
+          <configuration>
+            <failOnMissingWebXml>false</failOnMissingWebXml>
+            <webResources>
+              <resource>
+                <directory>${app.teavm.target.directory}</directory>
+                <targetPath>/</targetPath>
+              </resource>
+            </webResources>
+          </configuration>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
+</project>

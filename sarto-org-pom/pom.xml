@@ -1,0 +1,473 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>io.instanto</groupId>
+    <artifactId>instanto-org-pom</artifactId>
+    <version>0.1.0-SNAPSHOT</version>
+    <relativePath/>
+  </parent>
+
+  <groupId>io.instanto</groupId>
+  <artifactId>sarto-org-pom</artifactId>
+  <version>${revision}</version>
+  <packaging>pom</packaging>
+  <name>sarto-org-pom</name>
+  <description>Sarto dependency versions and framework build settings, extending the Instanto organisation parent.</description>
+  <url>https://sarto.io</url>
+
+  <!-- ── Organisation ─────────────────────────────────────────────────────── -->
+
+  <organization>
+    <name>Sarto</name>
+    <url>https://sarto.io</url>
+  </organization>
+
+  <licenses>
+    <license>
+      <name>Apache License, Version 2.0</name>
+      <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+
+  <!-- ── SCM ──────────────────────────────────────────────────────────────── -->
+  <!-- Develop privately, then transfer refined source to Instanto-io.
+       Versioned releases run from the Instanto-io checkout on local infrastructure. -->
+  <scm>
+    <url>https://github.com/cstainton/sarto-poms</url>
+        <connection>scm:git:https://github.com/cstainton/sarto-poms.git</connection>
+    <developerConnection>scm:git:ssh://git@github.com/cstainton/sarto-poms.git</developerConnection>
+    <tag>HEAD</tag>
+  </scm>
+
+  <!-- ── Distribution management ──────────────────────────────────────────── -->
+  <!-- GitHub Packages credentials are supplied by local Maven settings.
+       Release checkouts must use their own Instanto-io publication destination. -->
+
+  <distributionManagement>
+    <repository>
+      <id>github</id>
+      <name>GitHub Packages</name>
+      <url>https://maven.pkg.github.com/cstainton/sarto-poms</url>
+    </repository>
+    <snapshotRepository>
+      <id>github</id>
+      <name>GitHub Packages — Snapshots</name>
+      <url>https://maven.pkg.github.com/cstainton/sarto-poms</url>
+    </snapshotRepository>
+  </distributionManagement>
+
+  <repositories>
+    <repository>
+      <id>github</id>
+      <name>Sarto packages</name>
+      <url>https://maven.pkg.github.com/cstainton/*</url>
+      <releases><enabled>true</enabled></releases>
+      <snapshots><enabled>true</enabled></snapshots>
+    </repository>
+  </repositories>
+
+  <pluginRepositories>
+    <pluginRepository>
+      <id>github</id>
+      <name>Sarto build plugins</name>
+      <url>https://maven.pkg.github.com/cstainton/*</url>
+      <releases><enabled>true</enabled></releases>
+      <snapshots><enabled>true</enabled></snapshots>
+    </pluginRepository>
+  </pluginRepositories>
+
+  <!-- ── Shared version properties ─────────────────────────────────────────── -->
+
+  <properties>
+    <spotless.version>2.43.0</spotless.version>
+    <google-java-format.version>1.35.0</google-java-format.version>
+    <!-- ── POM suite version ──────────────────────────────────────────────────
+         Single version for the entire reusable POM suite.
+         To change the version for a release:
+           mvn versions:set-property -Dproperty=revision -DnewValue=0.2.0
+         To build/deploy a specific version on the CLI without editing the file:
+           mvn install -Drevision=0.2.0-SNAPSHOT
+    -->
+   <revision>0.1.0-SNAPSHOT</revision>
+
+   <java.version>21</java.version>
+    <maven.compiler.release>${java.version}</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+    <!-- Logging -->
+    <slf4j.version>2.0.18</slf4j.version>
+    <logback.version>1.5.38</logback.version>
+    <junit.version>6.1.2</junit.version>
+    <!-- JUnit 4 is not covered by junit-bom. Keep it at the version junit-vintage-engine
+         depends on, so vintage and the TeaVM JUnit runner agree on one JUnit 4. -->
+    <junit4.version>4.13.2</junit4.version>
+    <mockito.version>5.12.0</mockito.version>
+    <sarto-codegen.version>0.1.0-SNAPSHOT</sarto-codegen.version>
+    <sarto-cdi.version>0.1.0-SNAPSHOT</sarto-cdi.version>
+    <sarto-async.version>0.1.0-SNAPSHOT</sarto-async.version>
+    <sarto-auth.version>0.1.0-SNAPSHOT</sarto-auth.version>
+    <sarto-rest.version>0.1.0-SNAPSHOT</sarto-rest.version>
+    <sarto-soap.version>0.1.0-SNAPSHOT</sarto-soap.version>
+    <sarto-codec.version>0.1.0-SNAPSHOT</sarto-codec.version>
+    <sarto-relay.version>0.1.0-SNAPSHOT</sarto-relay.version>
+    <sarto-edge.version>0.1.0-SNAPSHOT</sarto-edge.version>
+    <sarto-persistence.version>0.1.0-SNAPSHOT</sarto-persistence.version>
+    <sarto-graphics.version>0.1.0-SNAPSHOT</sarto-graphics.version>
+    <sarto-scene.version>0.1.0-SNAPSHOT</sarto-scene.version>
+    <sarto-geo.version>0.1.0-SNAPSHOT</sarto-geo.version>
+    <sarto-geometry.version>0.1.0-SNAPSHOT</sarto-geometry.version>
+    <sarto-events.version>0.1.0-SNAPSHOT</sarto-events.version>
+    <sarto-model.version>0.1.0-SNAPSHOT</sarto-model.version>
+    <sarto-signals.version>0.1.0-SNAPSHOT</sarto-signals.version>
+    <sarto-resources.version>0.1.0-SNAPSHOT</sarto-resources.version>
+    <sarto-config.version>0.1.0-SNAPSHOT</sarto-config.version>
+    <sarto-transactions.version>0.1.0-SNAPSHOT</sarto-transactions.version>
+    <gsdk-widgets-emul.version>0.1.0-SNAPSHOT</gsdk-widgets-emul.version>
+    <spring-boot.version>4.1.0</spring-boot.version>
+
+    <!-- Maven plugin versions -->
+    <flatten-maven-plugin.version>1.7.3</flatten-maven-plugin.version>
+    <pgpverify-maven-plugin.version>1.19.1</pgpverify-maven-plugin.version>
+    <pgp-keys-map.version>2026.01.20</pgp-keys-map.version>
+    <sarto-build-maven-plugin.version>0.1.0-SNAPSHOT</sarto-build-maven-plugin.version>
+    <exec-maven-plugin.version>3.6.3</exec-maven-plugin.version>
+  </properties>
+
+  <!-- ── Shared dependency management ─────────────────────────────────────── -->
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>io.instanto</groupId>
+        <artifactId>sarto-graphics-bom</artifactId>
+        <version>${sarto-graphics.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>io.instanto</groupId>
+        <artifactId>sarto-scene-bom</artifactId>
+        <version>${sarto-scene.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>io.instanto</groupId>
+        <artifactId>sarto-geo-bom</artifactId>
+        <version>${sarto-geo.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>io.instanto</groupId>
+        <artifactId>sarto-geometry-bom</artifactId>
+        <version>${sarto-geometry.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>io.instanto</groupId>
+        <artifactId>sarto-auth-bom</artifactId>
+        <version>${sarto-auth.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>io.instanto</groupId>
+        <artifactId>sarto-transactions-bom</artifactId>
+        <version>${sarto-transactions.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.junit</groupId>
+        <artifactId>junit-bom</artifactId>
+        <version>${junit.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>junit</groupId>
+        <artifactId>junit</artifactId>
+        <version>${junit4.version}</version>
+        <scope>test</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-api</artifactId>
+        <version>${slf4j.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>ch.qos.logback</groupId>
+        <artifactId>logback-classic</artifactId>
+        <version>${logback.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.junit.jupiter</groupId>
+        <artifactId>junit-jupiter</artifactId>
+        <version>${junit.version}</version>
+        <scope>test</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.junit.jupiter</groupId>
+        <artifactId>junit-jupiter-api</artifactId>
+        <version>${junit.version}</version>
+        <scope>test</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <!-- ── Plugin management ────────────────────────────────────────────────── -->
+
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-maven-plugin</artifactId>
+          <version>${spring-boot.version}</version>
+        </plugin>
+        <plugin>
+          <groupId>org.simplify4u.plugins</groupId>
+          <artifactId>pgpverify-maven-plugin</artifactId>
+          <version>${pgpverify-maven-plugin.version}</version>
+          <configuration>
+            <!-- Runs before javac/codegen/TeaVM when the verification profile is active. -->
+            <scope>test</scope>
+            <verifyPomFiles>true</verifyPomFiles>
+            <verifyProvidedDependencies>true</verifyProvidedDependencies>
+            <verifyAtypical>true</verifyAtypical>
+            <verifyPlugins>true</verifyPlugins>
+            <verifyPluginDependencies>true</verifyPluginDependencies>
+            <!-- Reactor outputs and snapshots do not yet have release signatures. -->
+            <verifyReactorDependencies>false</verifyReactorDependencies>
+            <verifySnapshots>false</verifySnapshots>
+            <failWeakSignature>true</failWeakSignature>
+            <suppressSignatureOkLogging>true</suppressSignatureOkLogging>
+            <keysMapLocations>
+              <keysMapLocation>/pgp-keys-map.list</keysMapLocation>
+            </keysMapLocations>
+          </configuration>
+          <dependencies>
+            <dependency>
+              <groupId>org.simplify4u</groupId>
+              <artifactId>pgp-keys-map</artifactId>
+              <version>${pgp-keys-map.version}</version>
+            </dependency>
+          </dependencies>
+        </plugin>
+        <plugin>
+          <groupId>io.instanto</groupId>
+          <artifactId>sarto-build-maven-plugin</artifactId>
+          <version>${sarto-build-maven-plugin.version}</version>
+        </plugin>
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>exec-maven-plugin</artifactId>
+          <version>${exec-maven-plugin.version}</version>
+        </plugin>
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>flatten-maven-plugin</artifactId>
+          <version>${flatten-maven-plugin.version}</version>
+          <configuration>
+            <!-- Resolves only ${revision}, ${sha1}, ${changelist} — leaves the
+                 rest of the POM structure intact so dependency graphs stay readable. -->
+            <flattenMode>resolveCiFriendliesOnly</flattenMode>
+            <flattenDependencyMode>direct</flattenDependencyMode>
+            <updatePomFile>true</updatePomFile>
+          </configuration>
+          <executions>
+            <execution>
+              <id>flatten</id>
+              <phase>process-resources</phase>
+              <goals><goal>flatten</goal></goals>
+            </execution>
+            <execution>
+              <id>flatten.clean</id>
+              <phase>clean</phase>
+              <goals><goal>clean</goal></goals>
+            </execution>
+          </executions>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+
+    <!-- Activate flatten for every module that inherits from this POM -->
+    <plugins>
+      <plugin>
+        <groupId>com.diffplug.spotless</groupId>
+        <artifactId>spotless-maven-plugin</artifactId>
+        <version>${spotless.version}</version>
+        <configuration>
+          <java>
+            <includes>
+              <include>src/main/java/**/*.java</include>
+              <include>src/test/java/**/*.java</include>
+            </includes>
+            <excludes>
+              <exclude>**/generated/**</exclude>
+              <exclude>**/generated-sources/**</exclude>
+              <exclude>**/vendor/**</exclude>
+              <exclude>**/upstream/**</exclude>
+            </excludes>
+            <googleJavaFormat><version>${google-java-format.version}</version></googleJavaFormat>
+            <removeUnusedImports/>
+          </java>
+        </configuration>
+        <executions>
+          <execution>
+            <id>format-java</id>
+            <phase>validate</phase>
+            <goals><goal>apply</goal></goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>com.github.spotbugs</groupId>
+        <artifactId>spotbugs-maven-plugin</artifactId>
+        <version>4.10.3.0</version>
+        <configuration>
+          <effort>Max</effort>
+          <threshold>Low</threshold>
+          <xmlOutput>true</xmlOutput>
+          <spotbugsXmlOutputDirectory>${project.build.directory}/spotbugs</spotbugsXmlOutputDirectory>
+          <spotbugsXmlOutputFilename>${project.artifactId}-spotbugs.xml</spotbugsXmlOutputFilename>
+          <sarifOutput>true</sarifOutput>
+          <sarifOutputDirectory>${project.build.directory}/spotbugs</sarifOutputDirectory>
+          <sarifOutputFilename>${project.artifactId}-spotbugs.sarif</sarifOutputFilename>
+          <htmlOutput>true</htmlOutput>
+          <outputDirectory>${project.build.directory}/spotbugs</outputDirectory>
+          <failOnError>true</failOnError>
+        </configuration>
+        <executions>
+          <execution>
+            <id>spotbugs-report</id>
+            <phase>process-classes</phase>
+            <goals><goal>spotbugs</goal></goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-antrun-plugin</artifactId>
+        <version>3.2.0</version>
+        <executions>
+          <execution>
+            <id>name-spotbugs-html-report</id>
+            <phase>process-classes</phase>
+            <goals><goal>run</goal></goals>
+            <configuration>
+              <target>
+                <move todir="${project.build.directory}/spotbugs">
+                  <fileset dir="${project.build.directory}/spotbugs" includes="spotbugs.html" erroronmissingdir="false"/>
+                  <globmapper from="spotbugs.html" to="${project.artifactId}-spotbugs.html"/>
+                </move>
+              </target>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>flatten-maven-plugin</artifactId>
+      </plugin>
+    </plugins>
+  </build>
+
+  <!-- ── Profiles ─────────────────────────────────────────────────────────── -->
+
+  <profiles>
+    <!-- Reactor-only profiles are declared by higher-level aggregators. Keep a
+         no-op declaration here so selected child reactors can activate the
+         shared profile without Maven reporting it as unknown. -->
+    <profile>
+      <id>integration-tests</id>
+    </profile>
+
+
+    <!-- Publish to GitHub Packages -->
+    <profile>
+      <id>github-packages</id>
+      <repositories>
+        <repository>
+          <id>github</id>
+          <url>https://maven.pkg.github.com/cstainton/sarto-poms</url>
+          <releases><enabled>true</enabled></releases>
+          <snapshots><enabled>true</enabled></snapshots>
+        </repository>
+      </repositories>
+      <pluginRepositories>
+        <pluginRepository>
+          <id>github</id>
+          <url>https://maven.pkg.github.com/cstainton/sarto-poms</url>
+          <releases><enabled>true</enabled></releases>
+          <snapshots><enabled>true</enabled></snapshots>
+        </pluginRepository>
+      </pluginRepositories>
+      <distributionManagement>
+        <repository>
+          <id>github</id>
+          <name>GitHub Packages</name>
+          <url>https://maven.pkg.github.com/cstainton/sarto-poms</url>
+        </repository>
+        <snapshotRepository>
+          <id>github</id>
+          <name>GitHub Packages — Snapshots</name>
+          <url>https://maven.pkg.github.com/cstainton/sarto-poms</url>
+        </snapshotRepository>
+      </distributionManagement>
+    </profile>
+
+
+    <!-- Supply-chain prerequisite for unified JVM/TeaVM artifact work.
+         Usage: mvn verify -P verify-input-signatures
+
+         This validates detached OpenPGP signatures before compilation. The
+         planned composition-neutral Sarto input-artifact verifier will add
+         strict verification of signatures embedded inside dependency JARs. -->
+    <profile>
+      <id>verify-input-signatures</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.simplify4u.plugins</groupId>
+            <artifactId>pgpverify-maven-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>verify-input-openpgp-signatures</id>
+                <phase>validate</phase>
+                <goals>
+                  <goal>check</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <groupId>io.instanto</groupId>
+            <artifactId>sarto-build-maven-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>verify-input-jar-contents</id>
+                <phase>validate</phase>
+                <goals>
+                  <goal>verify-input-artifacts</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+
+    <!-- Release checks and packaging are inherited from instanto-org-pom. -->
+  </profiles>
+
+</project>

@@ -5,9 +5,9 @@
 
   <parent>
     <groupId>io.instanto</groupId>
-    <artifactId>sarto-java-pom</artifactId>
+    <artifactId>sarto-org-pom</artifactId>
     <version>${revision}</version>
-    <relativePath>../sarto-java-pom/pom.xml</relativePath>
+    <relativePath>../sarto-org-pom/pom.xml</relativePath>
   </parent>
 
   <artifactId>sarto-entity-model-pom</artifactId>
@@ -18,6 +18,19 @@
     observable, automap, entity-provider and configuration-entity generation
     without adding service RPC generation.
   </description>
+
+  <!-- ── Role ────────────────────────────────────────────────────────────
+       Parent for reusable managed entity model modules. It turns on Sarto entity,
+       observable, automap, entity-provider and configuration-entity generation
+       without adding service RPC generation, so a model module can be consumed
+       by a client and a server alike.
+
+       Provides  The Sarto API, model, resources and CDI bootstrap dependencies;
+                 the annotation processors that generate the model; the CDI bean
+                 index aggregation step.
+       Requires  The Sarto version properties from sarto-org-pom.
+       Not here  RPC and service generation. Use sarto-service-pom for that.
+  -->
 
   <dependencyManagement>
     <dependencies>

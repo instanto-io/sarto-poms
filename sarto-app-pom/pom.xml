@@ -5,15 +5,32 @@
 
   <parent>
     <groupId>io.instanto</groupId>
-    <artifactId>sarto-java-pom</artifactId>
+    <artifactId>sarto-org-pom</artifactId>
     <version>${revision}</version>
-    <relativePath>../sarto-java-pom/pom.xml</relativePath>
+    <relativePath>../sarto-org-pom/pom.xml</relativePath>
   </parent>
 
   <artifactId>sarto-app-pom</artifactId>
   <packaging>pom</packaging>
   <name>sarto-app-pom</name>
   <description>Neutral build parent for portable applications and their JRE and TeaVM artifacts</description>
+
+  <!-- ── Role ────────────────────────────────────────────────────────────
+       Neutral build parent for a portable application. One source tree produces both
+       a JRE artifact and a TeaVM artifact; the hosting parents below choose how
+       the TeaVM output is packaged and shipped.
+
+       Provides  The app.* properties that name the main classes, output
+                 directories and bundle files; the app-jre and app-teavm
+                 profiles, with Swing and JavaFX variants; the JavaFX platform
+                 profiles for each supported architecture; plugin management for
+                 teavm-maven-plugin, javafx-maven-plugin and the jar plugin; the
+                 CDI bean index aggregation step.
+       Requires  The Sarto version properties from sarto-org-pom. An application
+                 overrides app.jvm.main.class and app.teavm.main.class.
+       Not here  A hosting target. Inherit sarto-app-browser-pom,
+                 sarto-app-cloudflare-pom or sarto-app-tomcat-pom for that.
+  -->
   <properties>
     <javafx.version>26.0.1</javafx.version>
     <javafx.platform>mac-aarch64</javafx.platform>

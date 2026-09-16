@@ -14,6 +14,18 @@
   <packaging>pom</packaging>
   <name>sarto-service-pom</name>
 
+  <!-- ── Role ────────────────────────────────────────────────────────────
+       Parent for server-side service modules. It extends the entity model parent
+       with the RPC and coordination surface a service needs.
+
+       Provides  The Sarto core, RPC, bootstrap, coordination and app
+                 dependencies; the servlet and JAX-WS APIs; the component-jre,
+                 component-teavm and component-teavm-worker profiles; a
+                 runtime-neutral enforcer run.
+       Requires  Everything sarto-entity-model-pom requires.
+       Not here  Application packaging or a hosting target.
+  -->
+
   <dependencies>
     <dependency>
       <groupId>io.instanto</groupId>

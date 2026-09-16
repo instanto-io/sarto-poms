@@ -4,9 +4,11 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
+  <!-- Sarto libraries are portable and build TeaVM tests, so the TeaVM parent
+       supplies the version and dependency set. No library BOMs are imported. -->
   <parent>
     <groupId>io.instanto</groupId>
-    <artifactId>instanto-org-pom</artifactId>
+    <artifactId>instanto-teavm-pom</artifactId>
     <version>0.1.0-SNAPSHOT</version>
     <relativePath/>
   </parent>
@@ -17,21 +19,34 @@
   <name>Sarto Independent Library Build</name>
   <description>Build-only publishing and verification defaults; deliberately imports no library BOMs.</description>
 
+  <!-- ── Role ────────────────────────────────────────────────────────────
+       Build parent for a Sarto library that is released on its own. It deliberately
+       imports no BOMs and declares no dependencies, so a library never inherits
+       the framework's version set and stays free to pick its own.
+
+       Provides  Publication and verification defaults; plugin management for
+                 surefire, the compiler and sarto-build; active flattening of
+                 ${revision}.
+       Requires  A revision property, defaulted here.
+       Not here  Dependencies of any kind. That is the point of this parent.
+  -->
+
   <licenses>
     <license><name>Apache License, Version 2.0</name><url>https://www.apache.org/licenses/LICENSE-2.0.txt</url><distribution>repo</distribution></license>
   </licenses>
   <distributionManagement>
-    <repository><id>github</id><url>https://maven.pkg.github.com/cstainton/sarto-poms</url></repository>
-    <snapshotRepository><id>github</id><url>https://maven.pkg.github.com/cstainton/sarto-poms</url></snapshotRepository>
+    <repository><id>github</id><url>https://maven.pkg.github.com/${packages.owner}/sarto-poms</url></repository>
+    <snapshotRepository><id>github</id><url>https://maven.pkg.github.com/${packages.owner}/sarto-poms</url></snapshotRepository>
   </distributionManagement>
   <pluginRepositories>
     <pluginRepository>
-      <id>github</id><url>https://maven.pkg.github.com/cstainton/sarto</url>
+      <id>github</id><url>https://maven.pkg.github.com/instanto-io/*</url>
       <releases><enabled>true</enabled></releases><snapshots><enabled>true</enabled></snapshots>
     </pluginRepository>
   </pluginRepositories>
 
   <properties>
+    <packages.owner>instanto-io</packages.owner>
     <revision>0.1.0-SNAPSHOT</revision>
     <maven.compiler.release>21</maven.compiler.release>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

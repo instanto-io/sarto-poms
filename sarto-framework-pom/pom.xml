@@ -5,9 +5,9 @@
 
   <parent>
     <groupId>io.instanto</groupId>
-    <artifactId>sarto-java-pom</artifactId>
+    <artifactId>sarto-org-pom</artifactId>
     <version>${revision}</version>
-    <relativePath>../sarto-java-pom/pom.xml</relativePath>
+    <relativePath>../sarto-org-pom/pom.xml</relativePath>
   </parent>
 
   <groupId>io.instanto</groupId>
@@ -17,10 +17,23 @@
   <name>sarto base pom</name>
   <description>Reusable base POM for sarto modules</description>
 
+  <!-- ── Role ────────────────────────────────────────────────────────────
+       Parent for the reusable Sarto framework modules themselves. It carries the
+       framework's whole dependency surface, so a framework module declares what
+       it uses without a version.
+
+       Provides  Managed versions for every Sarto framework artifact and its
+                 third-party dependencies; the component-jre and component-teavm
+                 profiles, with their test variants, for modules that build for
+                 both runtimes; surefire management and an enforcer run.
+       Requires  The Sarto version properties from sarto-org-pom.
+       Not here  Application packaging. A framework module produces a library.
+  -->
+
    <properties>
         <!-- java.version, maven.compiler.release, project.build.sourceEncoding,
              slf4j.version, and plugin version properties are inherited from
-             sarto-org-pom via sarto-java-pom. Only sarto-specific
+             sarto-org-pom. Only sarto-specific
              dependency versions are declared here. -->
         <wire.version>6.4.5</wire.version>
         <quarkus.version>3.37.3</quarkus.version>

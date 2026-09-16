@@ -25,6 +25,15 @@
       &lt;/properties&gt;
   </description>
 
+  <!-- ── Role ────────────────────────────────────────────────────────────
+       Hosting parent for an application served as static files from a browser, and
+       for reusable WebJars built the same way.
+
+       Provides  The TeaVM bundle layout properties and the packaging steps that
+                 turn the TeaVM output into a jar or war.
+       Requires  Everything sarto-app-pom requires.
+  -->
+
   <properties>
     <!--
       Default output location for TeaVM-compiled JS relative to the WAR web root.

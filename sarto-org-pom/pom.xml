@@ -4,9 +4,12 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
+  <!-- Sarto compiles to the browser, so it extends the Instanto TeaVM parent
+       rather than the organisation parent directly. TeaVM's version, dependency
+       set and plugin pin all arrive from there. -->
   <parent>
     <groupId>io.instanto</groupId>
-    <artifactId>instanto-org-pom</artifactId>
+    <artifactId>instanto-teavm-pom</artifactId>
     <version>0.1.0-SNAPSHOT</version>
     <relativePath/>
   </parent>
@@ -17,6 +20,27 @@
   <packaging>pom</packaging>
   <name>sarto-org-pom</name>
   <description>Sarto dependency versions and framework build settings, extending the Instanto organisation parent.</description>
+
+  <!-- ── Role ────────────────────────────────────────────────────────────
+       The Sarto organisation layer: one place for every Sarto artifact version, the
+       publication destinations, and the licence header. Inherited by the Sarto
+       framework and application parents, and by any project that wants the full
+       Sarto dependency surface.
+
+       Provides  A version property for each Sarto library; JUnit, slf4j,
+                 logback and Mockito versions; BOM imports for graphics, scene,
+                 geo, geometry, auth and transactions plus junit-bom; plugin
+                 management for Spring Boot, pgpverify, sarto-build, exec and
+                 flatten; an active licence header and ${revision} flattening;
+                 the github-packages, verify-input-signatures and
+                 integration-tests profiles.
+       Requires  A revision property, defaulted here to the suite version.
+                 copyright.year and license-maven-plugin.version may be
+                 overridden per project.
+       Not here  TeaVM, which arrives from instanto-teavm-pom above, and
+                 formatting and static analysis, which come from
+                 instanto-org-pom above that.
+  -->
   <url>https://sarto.io</url>
 
   <!-- ── Organisation ─────────────────────────────────────────────────────── -->
@@ -45,26 +69,35 @@
   </scm>
 
   <!-- ── Distribution management ──────────────────────────────────────────── -->
-  <!-- GitHub Packages credentials are supplied by local Maven settings.
-       Release checkouts must use their own Instanto-io publication destination. -->
+  <!-- Snapshots and releases publish to the Instanto-io organisation's GitHub
+       Packages. Credentials come from the local Maven settings. A checkout that
+       publishes somewhere else overrides packages.owner on the command line.
+       Reading stays open to both owners while artifacts finish moving across. -->
 
   <distributionManagement>
     <repository>
       <id>github</id>
       <name>GitHub Packages</name>
-      <url>https://maven.pkg.github.com/cstainton/sarto-poms</url>
+      <url>https://maven.pkg.github.com/${packages.owner}/sarto-poms</url>
     </repository>
     <snapshotRepository>
       <id>github</id>
       <name>GitHub Packages — Snapshots</name>
-      <url>https://maven.pkg.github.com/cstainton/sarto-poms</url>
+      <url>https://maven.pkg.github.com/${packages.owner}/sarto-poms</url>
     </snapshotRepository>
   </distributionManagement>
 
   <repositories>
     <repository>
       <id>github</id>
-      <name>Sarto packages</name>
+      <name>Instanto packages</name>
+      <url>https://maven.pkg.github.com/instanto-io/*</url>
+      <releases><enabled>true</enabled></releases>
+      <snapshots><enabled>true</enabled></snapshots>
+    </repository>
+    <repository>
+      <id>github-development</id>
+      <name>Development packages</name>
       <url>https://maven.pkg.github.com/cstainton/*</url>
       <releases><enabled>true</enabled></releases>
       <snapshots><enabled>true</enabled></snapshots>
@@ -74,7 +107,14 @@
   <pluginRepositories>
     <pluginRepository>
       <id>github</id>
-      <name>Sarto build plugins</name>
+      <name>Instanto build plugins</name>
+      <url>https://maven.pkg.github.com/instanto-io/*</url>
+      <releases><enabled>true</enabled></releases>
+      <snapshots><enabled>true</enabled></snapshots>
+    </pluginRepository>
+    <pluginRepository>
+      <id>github-development</id>
+      <name>Development build plugins</name>
       <url>https://maven.pkg.github.com/cstainton/*</url>
       <releases><enabled>true</enabled></releases>
       <snapshots><enabled>true</enabled></snapshots>
@@ -84,8 +124,10 @@
   <!-- ── Shared version properties ─────────────────────────────────────────── -->
 
   <properties>
-    <spotless.version>2.43.0</spotless.version>
-    <google-java-format.version>1.35.0</google-java-format.version>
+    <!-- Owner of the GitHub Packages registry this suite publishes to.
+         Override on the command line to publish from another checkout. -->
+    <packages.owner>instanto-io</packages.owner>
+
     <!-- ── POM suite version ──────────────────────────────────────────────────
          Single version for the entire reusable POM suite.
          To change the version for a release:
@@ -137,6 +179,9 @@
     <pgp-keys-map.version>2026.01.20</pgp-keys-map.version>
     <sarto-build-maven-plugin.version>0.1.0-SNAPSHOT</sarto-build-maven-plugin.version>
     <exec-maven-plugin.version>3.6.3</exec-maven-plugin.version>
+    <license-maven-plugin.version>5.0.0</license-maven-plugin.version>
+    <!-- Overridable by any module that needs a different year in its headers. -->
+    <copyright.year>2026</copyright.year>
   </properties>
 
   <!-- ── Shared dependency management ─────────────────────────────────────── -->
@@ -299,80 +344,30 @@
       </plugins>
     </pluginManagement>
 
-    <!-- Activate flatten for every module that inherits from this POM -->
+    <!-- Formatting and SpotBugs are inherited from instanto-org-pom.
+         Activate flatten and the licence header for every module that
+         inherits from this POM. -->
     <plugins>
+                  
       <plugin>
-        <groupId>com.diffplug.spotless</groupId>
-        <artifactId>spotless-maven-plugin</artifactId>
-        <version>${spotless.version}</version>
+        <groupId>com.mycila</groupId>
+        <artifactId>license-maven-plugin</artifactId>
+        <version>${license-maven-plugin.version}</version>
         <configuration>
-          <java>
-            <includes>
-              <include>src/main/java/**/*.java</include>
-              <include>src/test/java/**/*.java</include>
-            </includes>
-            <excludes>
-              <exclude>**/generated/**</exclude>
-              <exclude>**/generated-sources/**</exclude>
-              <exclude>**/vendor/**</exclude>
-              <exclude>**/upstream/**</exclude>
-            </excludes>
-            <googleJavaFormat><version>${google-java-format.version}</version></googleJavaFormat>
-            <removeUnusedImports/>
-          </java>
+          <licenseSets>
+            <licenseSet>
+              <header>${maven.multiModuleProjectDirectory}/etc/license-header.txt</header>
+              <includes><include>**/*.java</include></includes>
+              <excludes>
+                <exclude>**/target/**</exclude>
+                <exclude>**/generated-sources/**</exclude>
+                <exclude>**/generated-resources/**</exclude>
+              </excludes>
+            </licenseSet>
+          </licenseSets>
+          <properties><copyright.year>${copyright.year}</copyright.year></properties>
+          <mapping><java>SLASHSTAR_STYLE</java></mapping>
         </configuration>
-        <executions>
-          <execution>
-            <id>format-java</id>
-            <phase>validate</phase>
-            <goals><goal>apply</goal></goals>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
-        <groupId>com.github.spotbugs</groupId>
-        <artifactId>spotbugs-maven-plugin</artifactId>
-        <version>4.10.3.0</version>
-        <configuration>
-          <effort>Max</effort>
-          <threshold>Low</threshold>
-          <xmlOutput>true</xmlOutput>
-          <spotbugsXmlOutputDirectory>${project.build.directory}/spotbugs</spotbugsXmlOutputDirectory>
-          <spotbugsXmlOutputFilename>${project.artifactId}-spotbugs.xml</spotbugsXmlOutputFilename>
-          <sarifOutput>true</sarifOutput>
-          <sarifOutputDirectory>${project.build.directory}/spotbugs</sarifOutputDirectory>
-          <sarifOutputFilename>${project.artifactId}-spotbugs.sarif</sarifOutputFilename>
-          <htmlOutput>true</htmlOutput>
-          <outputDirectory>${project.build.directory}/spotbugs</outputDirectory>
-          <failOnError>true</failOnError>
-        </configuration>
-        <executions>
-          <execution>
-            <id>spotbugs-report</id>
-            <phase>process-classes</phase>
-            <goals><goal>spotbugs</goal></goals>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-antrun-plugin</artifactId>
-        <version>3.2.0</version>
-        <executions>
-          <execution>
-            <id>name-spotbugs-html-report</id>
-            <phase>process-classes</phase>
-            <goals><goal>run</goal></goals>
-            <configuration>
-              <target>
-                <move todir="${project.build.directory}/spotbugs">
-                  <fileset dir="${project.build.directory}/spotbugs" includes="spotbugs.html" erroronmissingdir="false"/>
-                  <globmapper from="spotbugs.html" to="${project.artifactId}-spotbugs.html"/>
-                </move>
-              </target>
-            </configuration>
-          </execution>
-        </executions>
       </plugin>
 
       <plugin>
@@ -399,7 +394,7 @@
       <repositories>
         <repository>
           <id>github</id>
-          <url>https://maven.pkg.github.com/cstainton/sarto-poms</url>
+          <url>https://maven.pkg.github.com/${packages.owner}/sarto-poms</url>
           <releases><enabled>true</enabled></releases>
           <snapshots><enabled>true</enabled></snapshots>
         </repository>
@@ -407,7 +402,7 @@
       <pluginRepositories>
         <pluginRepository>
           <id>github</id>
-          <url>https://maven.pkg.github.com/cstainton/sarto-poms</url>
+          <url>https://maven.pkg.github.com/${packages.owner}/sarto-poms</url>
           <releases><enabled>true</enabled></releases>
           <snapshots><enabled>true</enabled></snapshots>
         </pluginRepository>
@@ -416,12 +411,12 @@
         <repository>
           <id>github</id>
           <name>GitHub Packages</name>
-          <url>https://maven.pkg.github.com/cstainton/sarto-poms</url>
+          <url>https://maven.pkg.github.com/${packages.owner}/sarto-poms</url>
         </repository>
         <snapshotRepository>
           <id>github</id>
           <name>GitHub Packages — Snapshots</name>
-          <url>https://maven.pkg.github.com/cstainton/sarto-poms</url>
+          <url>https://maven.pkg.github.com/${packages.owner}/sarto-poms</url>
         </snapshotRepository>
       </distributionManagement>
     </profile>

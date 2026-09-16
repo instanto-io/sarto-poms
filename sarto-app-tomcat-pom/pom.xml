@@ -20,6 +20,14 @@
     the Servlet container.
   </description>
 
+  <!-- ── Role ────────────────────────────────────────────────────────────
+       Hosting parent for an application deployed as a WAR to a servlet container.
+
+       Provides  The Sarto Tomcat server runtime, the servlet API, and WAR
+                 packaging.
+       Requires  Everything sarto-app-pom requires.
+  -->
+
   <dependencies>
     <dependency>
       <groupId>io.instanto</groupId>

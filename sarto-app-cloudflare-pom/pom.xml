@@ -15,6 +15,17 @@
   <name>Sarto application parent — Cloudflare host</name>
   <description>Cloudflare host build, staging and deployment conventions layered on the portable Sarto application parent</description>
 
+  <!-- ── Role ────────────────────────────────────────────────────────────
+       Hosting parent for an application deployed to Cloudflare Workers or Pages.
+
+       Provides  The Cloudflare staging directories, worker script and
+                 compatibility date, the wrangler and Node versions, the
+                 Cloudflare edge runtime and CDI dependencies, and the
+                 stage-pages, stage-local and publish-cloudflare profiles.
+       Requires  Everything sarto-app-pom requires. A project sets
+                 cloudflare.pages.projectName and the worker script name.
+  -->
+
   <properties>
     <cloudflare.pages.stageDirectory>${project.build.directory}/cloudflare-pages</cloudflare.pages.stageDirectory>
     <cloudflare.assets.stageDirectory>${cloudflare.pages.stageDirectory}/assets</cloudflare.assets.stageDirectory>

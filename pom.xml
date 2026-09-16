@@ -16,12 +16,20 @@
   <name>sarto-poms</name>
   <description>Reusable POMs for Sarto libraries and Sarto application development frameworks</description>
 
+  <!-- ── Role ────────────────────────────────────────────────────────────
+       Reactor aggregator for the POM suite. It exists so the whole suite builds and
+       installs in one pass; it is not a parent for anything outside this
+       repository.
+
+       Provides  Nothing to downstream projects.
+       Requires  Nothing.
+  -->
+
   <properties>
     <!-- The authoritative value lives in sarto-org-pom. -->
     <revision>0.1.0-SNAPSHOT</revision>
     <maven.compiler.release>21</maven.compiler.release>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <teavm.version>0.15.0</teavm.version>
     <slf4j.version>2.0.12</slf4j.version>
     <javafx.version>21.0.5</javafx.version>
     <javafx.platform>mac-aarch64</javafx.platform>
@@ -31,7 +39,6 @@
     <modules>
         <module>sarto-library-pom</module>
         <module>sarto-org-pom</module>
-        <module>sarto-java-pom</module>
         <module>sarto-framework-pom</module>
         <module>sarto-entity-model-pom</module>
         <module>sarto-service-pom</module>

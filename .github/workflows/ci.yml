@@ -5,8 +5,11 @@ on:
     branches: [main]
   pull_request:
 
+# The shared workflow asks for packages: write, and a called workflow cannot be
+# granted more than its caller has.
 permissions:
   contents: read
+  packages: write
 
 jobs:
   verify:

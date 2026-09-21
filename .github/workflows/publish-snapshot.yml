@@ -18,6 +18,10 @@ jobs:
     uses: instanto-io/instanto-poms/.github/workflows/maven-build.yml@main
     with:
       name: Publish snapshot POMs
+      # Same temporary bootstrap as CI (see ci.yml): remove with it.
+      parents: |
+        instanto-io/instanto-poms pom.xml
+        cstainton/sarto-cdi sarto-cdi-teavm-tooling/pom.xml
       goals: deploy
       maven-args: -DskipTests
     secrets: inherit

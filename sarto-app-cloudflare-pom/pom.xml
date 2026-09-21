@@ -57,15 +57,18 @@
     <dependency>
       <groupId>io.instanto</groupId>
       <artifactId>sarto-cdi-teavm-tooling</artifactId>
+      <version>${sarto-cdi.version}</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>io.instanto</groupId>
       <artifactId>sarto-edge-cf-jso</artifactId>
+      <version>${sarto-edge.version}</version>
     </dependency>
     <dependency>
       <groupId>io.instanto</groupId>
       <artifactId>sarto-edge-cf-cdi</artifactId>
+      <version>${sarto-edge.version}</version>
     </dependency>
   </dependencies>
 

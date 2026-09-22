@@ -24,4 +24,7 @@ jobs:
         cstainton/sarto-cdi sarto-cdi-teavm-tooling/pom.xml
       goals: deploy
       maven-args: -DskipTests
-    secrets: inherit
+    secrets:
+      PACKAGES_TOKEN: ${{ secrets.PACKAGES_TOKEN }}
+      FORGEJO_PACKAGE_USER: ${{ secrets.FORGEJO_PACKAGE_USER }}
+      FORGEJO_PACKAGE_TOKEN: ${{ secrets.FORGEJO_PACKAGE_TOKEN }}

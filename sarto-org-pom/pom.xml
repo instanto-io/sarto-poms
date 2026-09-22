@@ -32,8 +32,7 @@
                  geo, geometry, auth and transactions plus junit-bom; plugin
                  management for Spring Boot, pgpverify, sarto-build, exec and
                  flatten; an active licence header and ${revision} flattening;
-                 the github-packages, verify-input-signatures and
-                 integration-tests profiles.
+                 the verify-input-signatures and integration-tests profiles.
        Requires  A revision property, defaulted here to the suite version.
                  copyright.year and license-maven-plugin.version may be
                  overridden per project.
@@ -69,54 +68,34 @@
   </scm>
 
   <!-- ── Distribution management ──────────────────────────────────────────── -->
-  <!-- Snapshots and releases publish to the Instanto-io organisation's GitHub
-       Packages. Credentials come from the local Maven settings. A checkout that
-       publishes somewhere else overrides packages.owner on the command line.
-       Reading stays open to both owners while artifacts finish moving across. -->
+  <!-- Snapshot publication stays inside Instanto. Release versions are captured
+       by the Central publishing extension configured below and uploaded to the
+       Central Publisher Portal. Credentials come from local Maven settings. -->
 
   <distributionManagement>
-    <repository>
-      <id>github</id>
-      <name>GitHub Packages</name>
-      <url>https://maven.pkg.github.com/${packages.owner}/sarto-poms</url>
-    </repository>
     <snapshotRepository>
-      <id>github</id>
-      <name>GitHub Packages — Snapshots</name>
-      <url>https://maven.pkg.github.com/${packages.owner}/sarto-poms</url>
+      <id>forgejo</id>
+      <name>Instanto snapshots</name>
+      <url>https://packages.instanto.io/api/packages/instanto-io/maven</url>
     </snapshotRepository>
   </distributionManagement>
 
   <repositories>
     <repository>
-      <id>github</id>
-      <name>Instanto packages</name>
-      <url>https://maven.pkg.github.com/instanto-io/*</url>
-      <releases><enabled>true</enabled></releases>
-      <snapshots><enabled>true</enabled></snapshots>
-    </repository>
-    <repository>
-      <id>github-development</id>
-      <name>Development packages</name>
-      <url>https://maven.pkg.github.com/cstainton/*</url>
-      <releases><enabled>true</enabled></releases>
+      <id>forgejo</id>
+      <name>Instanto snapshots</name>
+      <url>https://packages.instanto.io/api/packages/instanto-io/maven</url>
+      <releases><enabled>false</enabled></releases>
       <snapshots><enabled>true</enabled></snapshots>
     </repository>
   </repositories>
 
   <pluginRepositories>
     <pluginRepository>
-      <id>github</id>
-      <name>Instanto build plugins</name>
-      <url>https://maven.pkg.github.com/instanto-io/*</url>
-      <releases><enabled>true</enabled></releases>
-      <snapshots><enabled>true</enabled></snapshots>
-    </pluginRepository>
-    <pluginRepository>
-      <id>github-development</id>
-      <name>Development build plugins</name>
-      <url>https://maven.pkg.github.com/cstainton/*</url>
-      <releases><enabled>true</enabled></releases>
+      <id>forgejo</id>
+      <name>Instanto snapshot build plugins</name>
+      <url>https://packages.instanto.io/api/packages/instanto-io/maven</url>
+      <releases><enabled>false</enabled></releases>
       <snapshots><enabled>true</enabled></snapshots>
     </pluginRepository>
   </pluginRepositories>
@@ -124,10 +103,6 @@
   <!-- ── Shared version properties ─────────────────────────────────────────── -->
 
   <properties>
-    <!-- Owner of the GitHub Packages registry this suite publishes to.
-         Override on the command line to publish from another checkout. -->
-    <packages.owner>instanto-io</packages.owner>
-
     <!-- ── POM suite version ──────────────────────────────────────────────────
          Single version for the entire reusable POM suite.
          To change the version for a release:
@@ -348,7 +323,6 @@
          Activate flatten and the licence header for every module that
          inherits from this POM. -->
     <plugins>
-                  
       <plugin>
         <groupId>com.mycila</groupId>
         <artifactId>license-maven-plugin</artifactId>
@@ -386,41 +360,6 @@
     <profile>
       <id>integration-tests</id>
     </profile>
-
-
-    <!-- Publish to GitHub Packages -->
-    <profile>
-      <id>github-packages</id>
-      <repositories>
-        <repository>
-          <id>github</id>
-          <url>https://maven.pkg.github.com/${packages.owner}/sarto-poms</url>
-          <releases><enabled>true</enabled></releases>
-          <snapshots><enabled>true</enabled></snapshots>
-        </repository>
-      </repositories>
-      <pluginRepositories>
-        <pluginRepository>
-          <id>github</id>
-          <url>https://maven.pkg.github.com/${packages.owner}/sarto-poms</url>
-          <releases><enabled>true</enabled></releases>
-          <snapshots><enabled>true</enabled></snapshots>
-        </pluginRepository>
-      </pluginRepositories>
-      <distributionManagement>
-        <repository>
-          <id>github</id>
-          <name>GitHub Packages</name>
-          <url>https://maven.pkg.github.com/${packages.owner}/sarto-poms</url>
-        </repository>
-        <snapshotRepository>
-          <id>github</id>
-          <name>GitHub Packages — Snapshots</name>
-          <url>https://maven.pkg.github.com/${packages.owner}/sarto-poms</url>
-        </snapshotRepository>
-      </distributionManagement>
-    </profile>
-
 
     <!-- Supply-chain prerequisite for unified JVM/TeaVM artifact work.
          Usage: mvn verify -P verify-input-signatures

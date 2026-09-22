@@ -323,18 +323,6 @@
          Activate flatten and the licence header for every module that
          inherits from this POM. -->
     <plugins>
-      <!-- The extension sends release versions to the Central Publisher Portal.
-           For snapshots it respects distributionManagement above and therefore
-           deploys to the private Instanto registry instead. -->
-      <plugin>
-        <groupId>org.sonatype.central</groupId>
-        <artifactId>central-publishing-maven-plugin</artifactId>
-        <extensions>true</extensions>
-        <configuration>
-          <publishingServerId>central</publishingServerId>
-        </configuration>
-      </plugin>
-
       <plugin>
         <groupId>com.mycila</groupId>
         <artifactId>license-maven-plugin</artifactId>

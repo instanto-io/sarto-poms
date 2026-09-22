@@ -93,16 +93,6 @@
       </plugins>
     </pluginManagement>
     <plugins>
-      <!-- Releases go through the Central Publisher Portal. Snapshot versions
-           continue through distributionManagement to the Instanto registry. -->
-      <plugin>
-        <groupId>org.sonatype.central</groupId>
-        <artifactId>central-publishing-maven-plugin</artifactId>
-        <extensions>true</extensions>
-        <configuration>
-          <publishingServerId>central</publishingServerId>
-        </configuration>
-      </plugin>
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>flatten-maven-plugin</artifactId>

@@ -59,6 +59,18 @@ parents as ordinary Maven artifacts.
 ./mvnw install -DskipTests
 ```
 
+## Publishing
+
+Snapshot versions publish to the private Instanto Forgejo registry at
+`https://packages.instanto.io/api/packages/instanto-io/maven`. On the Instanto
+runners that hostname is routed through the LAN proxy; no private hostname or
+address is stored in project POMs.
+
+Release versions are staged with Sonatype's Central Publisher Portal plugin.
+Central publication still requires the `io.instanto` namespace, a `central`
+credential in Maven settings, release signing and the release workflow to be
+configured. Until that setup is complete, only snapshots should be deployed.
+
 Verify build inputs before compilation, which checks detached OpenPGP
 signatures and signed JAR contents during `validate`:
 

@@ -35,18 +35,32 @@
     <license><name>Apache License, Version 2.0</name><url>https://www.apache.org/licenses/LICENSE-2.0.txt</url><distribution>repo</distribution></license>
   </licenses>
   <distributionManagement>
-    <repository><id>github</id><url>https://maven.pkg.github.com/${packages.owner}/sarto-poms</url></repository>
-    <snapshotRepository><id>github</id><url>https://maven.pkg.github.com/${packages.owner}/sarto-poms</url></snapshotRepository>
+    <snapshotRepository>
+      <id>forgejo</id>
+      <name>Instanto snapshots</name>
+      <url>https://packages.instanto.io/api/packages/instanto-io/maven</url>
+    </snapshotRepository>
   </distributionManagement>
+  <repositories>
+    <repository>
+      <id>forgejo</id>
+      <name>Instanto snapshots</name>
+      <url>https://packages.instanto.io/api/packages/instanto-io/maven</url>
+      <releases><enabled>false</enabled></releases>
+      <snapshots><enabled>true</enabled></snapshots>
+    </repository>
+  </repositories>
   <pluginRepositories>
     <pluginRepository>
-      <id>github</id><url>https://maven.pkg.github.com/instanto-io/*</url>
-      <releases><enabled>true</enabled></releases><snapshots><enabled>true</enabled></snapshots>
+      <id>forgejo</id>
+      <name>Instanto snapshot build plugins</name>
+      <url>https://packages.instanto.io/api/packages/instanto-io/maven</url>
+      <releases><enabled>false</enabled></releases>
+      <snapshots><enabled>true</enabled></snapshots>
     </pluginRepository>
   </pluginRepositories>
 
   <properties>
-    <packages.owner>instanto-io</packages.owner>
     <revision>0.1.0-SNAPSHOT</revision>
     <maven.compiler.release>21</maven.compiler.release>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -79,6 +93,16 @@
       </plugins>
     </pluginManagement>
     <plugins>
+      <!-- Releases go through the Central Publisher Portal. Snapshot versions
+           continue through distributionManagement to the Instanto registry. -->
+      <plugin>
+        <groupId>org.sonatype.central</groupId>
+        <artifactId>central-publishing-maven-plugin</artifactId>
+        <extensions>true</extensions>
+        <configuration>
+          <publishingServerId>central</publishingServerId>
+        </configuration>
+      </plugin>
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>flatten-maven-plugin</artifactId>

@@ -23,4 +23,7 @@ jobs:
       name: Verify the POM suite on JDK ${{ matrix.java }}
       java-version: ${{ matrix.java }}
       goals: verify
-    secrets: inherit
+    secrets:
+      PACKAGES_TOKEN: ${{ secrets.PACKAGES_TOKEN }}
+      FORGEJO_PACKAGE_USER: ${{ secrets.FORGEJO_PACKAGE_USER }}
+      FORGEJO_PACKAGE_TOKEN: ${{ secrets.FORGEJO_PACKAGE_TOKEN }}

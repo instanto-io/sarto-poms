@@ -43,8 +43,6 @@
     <app.teavm.target.file>app.js</app.teavm.target.file>
     <app.teavm.phase>none</app.teavm.phase>
     <app.teavm.bundle.file>${project.build.directory}/${project.artifactId}-${project.version}-web.zip</app.teavm.bundle.file>
-    <app.teavm.source.maps.generated>false</app.teavm.source.maps.generated>
-    <app.teavm.source.files.copied>false</app.teavm.source.files.copied>
     <teavm.skip>true</teavm.skip>
     <!--
       Local dev server port used by the TeaVM app serve goal.
@@ -188,16 +186,19 @@
               <artifactId>teavm-extras-slf4j</artifactId>
               <version>${teavm.version}</version>
             </dependency>
+            <dependency>
+              <groupId>io.instanto</groupId>
+              <artifactId>sarto-onejar-plugin</artifactId>
+              <version>${sarto-onejar.version}</version>
+            </dependency>
           </dependencies>
           <configuration>
             <mainClass>${app.teavm.main.class}</mainClass>
             <targetType>JAVASCRIPT</targetType>
             <targetDirectory>${app.teavm.target.directory}</targetDirectory>
             <targetFileName>${app.teavm.target.file}</targetFileName>
-            <sourceMapsGenerated>${app.teavm.source.maps.generated}</sourceMapsGenerated>
-            <sourceFilesCopied>${app.teavm.source.files.copied}</sourceFilesCopied>
             <transformers>
-              <transformer>io.instanto.sarto.cdi.teavm.JvmTargetPruningTransformer</transformer>
+              <transformer>io.instanto.sarto.onejar.teavm.JvmTargetPruningTransformer</transformer>
             </transformers>
           </configuration>
         </plugin>
@@ -366,12 +367,6 @@
           <groupId>io.instanto</groupId>
           <artifactId>sarto-cdi-bootstrap</artifactId>
           <version>${sarto-cdi.version}</version>
-        </dependency>
-        <dependency>
-          <groupId>io.instanto</groupId>
-          <artifactId>sarto-cdi-teavm-tooling</artifactId>
-          <version>${sarto-cdi.version}</version>
-          <scope>provided</scope>
         </dependency>
         <!-- Supplies TeaVM-compatible java.util.concurrent completion-stage classes used
              by Jakarta CDI event delivery and Sarto's portable async contracts. -->

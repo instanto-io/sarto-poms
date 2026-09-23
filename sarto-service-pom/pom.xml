@@ -123,10 +123,15 @@
               <artifactId>teavm-extras-slf4j</artifactId>
               <version>${teavm.version}</version>
             </dependency>
+            <dependency>
+              <groupId>io.instanto</groupId>
+              <artifactId>sarto-onejar-plugin</artifactId>
+              <version>${sarto-onejar.version}</version>
+            </dependency>
           </dependencies>
           <configuration>
             <transformers>
-              <transformer>io.instanto.sarto.cdi.teavm.JvmTargetPruningTransformer</transformer>
+              <transformer>io.instanto.sarto.onejar.teavm.JvmTargetPruningTransformer</transformer>
             </transformers>
           </configuration>
         </plugin>
@@ -327,12 +332,6 @@
           <groupId>io.instanto</groupId>
           <artifactId>sarto-cdi-bootstrap</artifactId>
           <version>${sarto-cdi.version}</version>
-        </dependency>
-        <dependency>
-          <groupId>io.instanto</groupId>
-          <artifactId>sarto-cdi-teavm-tooling</artifactId>
-          <version>${sarto-cdi.version}</version>
-          <scope>provided</scope>
         </dependency>
       </dependencies>
       <build>

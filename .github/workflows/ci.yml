@@ -22,12 +22,6 @@ jobs:
     with:
       name: Verify the POM suite on JDK ${{ matrix.java }}
       java-version: ${{ matrix.java }}
-      # Temporary bootstrap: the cloudflare parent resolves the CDI tooling
-      # jar, which is unpublished until sarto-cdi CI goes green. Install it
-      # from source until then, then drop the second line.
-      parents: |
-        instanto-io/instanto-poms pom.xml
-        cstainton/sarto-cdi sarto-cdi-teavm-tooling/pom.xml
       goals: verify
     secrets:
       PACKAGES_TOKEN: ${{ secrets.PACKAGES_TOKEN }}

@@ -58,12 +58,10 @@
   </licenses>
 
   <!-- ── SCM ──────────────────────────────────────────────────────────────── -->
-  <!-- Develop privately, then transfer refined source to Instanto-io.
-       Versioned releases run from the Instanto-io checkout on local infrastructure. -->
   <scm>
-    <url>https://github.com/cstainton/sarto-poms</url>
-        <connection>scm:git:https://github.com/cstainton/sarto-poms.git</connection>
-    <developerConnection>scm:git:ssh://git@github.com/cstainton/sarto-poms.git</developerConnection>
+    <url>https://github.com/instanto-io/sarto-poms</url>
+    <connection>scm:git:https://github.com/instanto-io/sarto-poms.git</connection>
+    <developerConnection>scm:git:ssh://git@github.com/instanto-io/sarto-poms.git</developerConnection>
     <tag>HEAD</tag>
   </scm>
 

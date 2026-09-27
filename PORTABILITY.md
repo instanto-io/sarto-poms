@@ -16,9 +16,8 @@ chooses its platform implementation. For direct use, call the documented
 constructor or factory for the host. CDI is optional unless the particular
 integration module requires it.
 
-For Sarto CDI, prepare a graph for the application's target. The
-[bootstrap guide](https://github.com/cstainton/sarto-cdi/blob/main/sarto-cdi-bootstrap/README.md#select-platform-implementations)
-shows the configuration. Application mode alone does not select platform
+For Sarto CDI, prepare a graph for the application's target, as described in
+the Sarto CDI bootstrap guide. Application mode alone does not select platform
 beans. A JVM graph includes JVM and shared beans; a TeaVM graph includes
 TeaVM and shared beans. Declare both graphs only when building both targets.
 Reusable libraries contribute their bean indexes, not application startup

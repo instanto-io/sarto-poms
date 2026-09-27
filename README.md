@@ -53,8 +53,8 @@ See [PORTABILITY.md](PORTABILITY.md) for host integrations,
 
 ## Project links
 
-[Sarto](https://github.com/cstainton) ·
+[Sarto](https://github.com/instanto-io) ·
 [TeaVM](https://github.com/konsoletyper/teavm)
 
-To support maintenance: [Sponsor Sarto](https://github.com/sponsors/cstainton)
+To support maintenance: [Sponsor Sarto](https://github.com/sponsors/instanto-io)
 or [Sponsor TeaVM](https://github.com/sponsors/konsoletyper).

@@ -43,7 +43,7 @@
       </dependency>
       <dependency>
         <groupId>io.instanto</groupId>
-        <artifactId>sarto-resources-model</artifactId>
+        <artifactId>sarto-application-config-model</artifactId>
         <version>${revision}</version>
       </dependency>
     </dependencies>
@@ -62,7 +62,7 @@
     </dependency>
     <dependency>
       <groupId>io.instanto</groupId>
-      <artifactId>sarto-resources-model</artifactId>
+      <artifactId>sarto-application-config-model</artifactId>
       <version>${revision}</version>
     </dependency>
     <!-- Maven 3 reactor edge; javac activation remains on annotationProcessorPaths. -->

@@ -17,9 +17,10 @@ jobs:
   publish:
     uses: instanto-io/instanto-poms/.github/workflows/maven-build.yml@main
     with:
-      name: Publish independent library parent
+      # Every parent POM is published here; the monorepo no longer publishes copies of them.
+      name: Publish the parent POMs
       goals: deploy
-      maven-args: -f sarto-library-pom/pom.xml -DskipTests
+      maven-args: -DskipTests
     secrets:
       PACKAGES_TOKEN: ${{ secrets.PACKAGES_TOKEN }}
       FORGEJO_PACKAGE_USER: ${{ secrets.FORGEJO_PACKAGE_USER }}

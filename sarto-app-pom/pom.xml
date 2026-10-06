@@ -186,6 +186,11 @@
               <artifactId>teavm-extras-slf4j</artifactId>
               <version>${teavm.version}</version>
             </dependency>
+            <dependency>
+              <groupId>io.instanto</groupId>
+              <artifactId>sarto-onejar-plugin</artifactId>
+              <version>${sarto-onejar.version}</version>
+            </dependency>
           </dependencies>
           <configuration>
             <mainClass>${app.teavm.main.class}</mainClass>
@@ -193,7 +198,7 @@
             <targetDirectory>${app.teavm.target.directory}</targetDirectory>
             <targetFileName>${app.teavm.target.file}</targetFileName>
             <transformers>
-              <transformer>io.instanto.sarto.cdi.teavm.JvmTargetPruningTransformer</transformer>
+              <transformer>io.instanto.sarto.onejar.teavm.JvmTargetPruningTransformer</transformer>
             </transformers>
           </configuration>
         </plugin>
@@ -361,11 +366,6 @@
         <dependency>
           <groupId>io.instanto</groupId>
           <artifactId>sarto-cdi-bootstrap</artifactId>
-        </dependency>
-        <dependency>
-          <groupId>io.instanto</groupId>
-          <artifactId>sarto-cdi-teavm-tooling</artifactId>
-          <scope>provided</scope>
         </dependency>
         <!-- Supplies TeaVM-compatible java.util.concurrent completion-stage classes used
              by Jakarta CDI event delivery and Sarto's portable async contracts. -->

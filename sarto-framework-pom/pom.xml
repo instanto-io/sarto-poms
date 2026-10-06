@@ -110,6 +110,11 @@
             </dependency>
             <dependency>
                 <groupId>io.instanto</groupId>
+                <artifactId>sarto-events-testkit</artifactId>
+                <version>${sarto-events.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.instanto</groupId>
                 <artifactId>sarto-distributed-events</artifactId>
                 <version>${project.version}</version>
             </dependency>
@@ -375,6 +380,16 @@
             <dependency>
                 <groupId>io.instanto</groupId>
                 <artifactId>sarto-annotation-processor</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.instanto</groupId>
+                <artifactId>sarto-framework-codegen</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.instanto</groupId>
+                <artifactId>sarto-testing-auth</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>

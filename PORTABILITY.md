@@ -24,8 +24,9 @@ Reusable libraries contribute their bean indexes, not application startup
 providers.
 
 TeaVM compiler integration remains part of the application build. Examples
-include `sarto-cdi-teavm-tooling` for CDI and `teavm-extras-slf4j` for Model's
-logging. These are separate from choosing a platform coordinate for each
+include `sarto-onejar-plugin`, which prunes JVM-only code from the TeaVM build,
+and `teavm-extras-slf4j` for Model's logging; the application parents put both
+on the TeaVM compiler's classpath. These are separate from choosing a platform coordinate for each
 runtime library.
 
 ## Choose a host integration

@@ -326,6 +326,9 @@
       <properties>
         <app.teavm.main.class>io.instanto.app.GeneratedTeaVmWorkerMain</app.teavm.main.class>
         <app.teavm.target.file>worker.js</app.teavm.target.file>
+        <instanto.terser.phase>prepare-package</instanto.terser.phase>
+        <instanto.terser.directory>${project.build.directory}/generated-resources/teavm</instanto.terser.directory>
+        <instanto.terser.file>${app.teavm.target.file}</instanto.terser.file>
       </properties>
       <dependencies>
         <dependency>
@@ -380,6 +383,10 @@
                 </configuration>
               </execution>
             </executions>
+          </plugin>
+          <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>exec-maven-plugin</artifactId>
           </plugin>
         </plugins>
       </build>

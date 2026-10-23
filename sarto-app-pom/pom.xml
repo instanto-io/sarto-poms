@@ -43,7 +43,6 @@
     <app.teavm.target.file>app.js</app.teavm.target.file>
     <app.teavm.phase>none</app.teavm.phase>
     <instanto.terser.phase>${app.teavm.phase}</instanto.terser.phase>
-    <instanto.terser.skip>${teavm.skip}</instanto.terser.skip>
     <instanto.terser.directory>${app.teavm.target.directory}</instanto.terser.directory>
     <instanto.terser.file>${app.teavm.target.file}</instanto.terser.file>
     <app.teavm.bundle.file>${project.build.directory}/${project.artifactId}-${project.version}-web.zip</app.teavm.bundle.file>
@@ -700,6 +699,13 @@
           </plugins>
         </pluginManagement>
       </build>
+    </profile>
+    <!-- A release build minifies the application's JavaScript, when it compiles any. -->
+    <profile>
+      <id>release</id>
+      <properties>
+        <instanto.terser.skip>${teavm.skip}</instanto.terser.skip>
+      </properties>
     </profile>
   </profiles>
 </project>

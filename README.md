@@ -47,11 +47,12 @@ instanto-org-pom                   Common Instanto build and release settings
 
 ## Further guidance
 
-The `app-teavm` and `component-teavm-worker` builds use the shared Terser Maven
-execution after TeaVM compilation and before packaging. TeaVM's own minification
-is disabled by `instanto-teavm-pom`. Java source maps and asset filenames are
-preserved. Builders need Node.js and npm; use `-Dinstanto.terser.skip=true` to
-retain readable JavaScript for development. Applications with custom TeaVM
+The `app-teavm` and `component-teavm-worker` builds minify their JavaScript with
+the shared Terser Maven execution in a release build (`-Prelease`) only, after
+TeaVM compilation and before packaging. Every other build deploys TeaVM's
+readable output with its source maps. TeaVM's own minification is disabled by
+`instanto-teavm-pom`. Java source maps and asset filenames are preserved. A
+release build needs Node.js and npm. Applications with custom TeaVM
 executions should explicitly configure the corresponding `instanto.terser.*`
 output properties and phase, and declare `exec-maven-plugin` after TeaVM and
 before staging their assets.

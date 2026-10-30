@@ -68,3 +68,10 @@ See [PORTABILITY.md](PORTABILITY.md) for host integrations,
 
 To support maintenance: [Sponsor Sarto](https://github.com/sponsors/instanto-io)
 or [Sponsor TeaVM](https://github.com/sponsors/konsoletyper).
+
+## Quality
+
+The shared build configuration is verified by the organisation's CI. Repositories that consume it publish SpotBugs findings to code scanning and a compact SpotBugs/SonarQube table on each verification run.
+
+See [Actions](https://github.com/instanto-io/sarto-poms/actions) for the latest verification result.
+

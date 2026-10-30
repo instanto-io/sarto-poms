@@ -71,7 +71,7 @@ or [Sponsor TeaVM](https://github.com/sponsors/konsoletyper).
 
 ## Quality
 
-The shared build configuration is verified by the organisation's CI. Repositories that consume it publish SpotBugs findings to code scanning and a compact SpotBugs/SonarQube table on each verification run.
+The shared build configuration is verified by the organisation's CI. Consumers publish a compact SpotBugs/SonarQube table on each verification run, and repositories with their own verification job also publish SARIF to code scanning.
 
 See [Actions](https://github.com/instanto-io/sarto-poms/actions) for the latest verification result.
 

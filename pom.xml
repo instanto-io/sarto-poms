@@ -26,6 +26,7 @@
   -->
 
   <properties>
+    <instanto.repository>sarto-poms</instanto.repository>
     <!-- The authoritative value lives in sarto-org-pom. -->
     <revision>0.1.0-SNAPSHOT</revision>
     <maven.compiler.release>21</maven.compiler.release>

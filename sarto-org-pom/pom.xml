@@ -40,8 +40,6 @@
                  formatting and static analysis, which come from
                  instanto-org-pom above that.
   -->
-  <url>https://sarto.io</url>
-
   <!-- ── Organisation ─────────────────────────────────────────────────────── -->
 
   <organization>
@@ -56,14 +54,6 @@
       <distribution>repo</distribution>
     </license>
   </licenses>
-
-  <!-- ── SCM ──────────────────────────────────────────────────────────────── -->
-  <scm>
-    <url>https://github.com/instanto-io/sarto-poms</url>
-    <connection>scm:git:https://github.com/instanto-io/sarto-poms.git</connection>
-    <developerConnection>scm:git:ssh://git@github.com/instanto-io/sarto-poms.git</developerConnection>
-    <tag>HEAD</tag>
-  </scm>
 
   <!-- ── Distribution management ──────────────────────────────────────────── -->
   <!-- Snapshot publication stays inside Instanto. Release versions are captured
@@ -101,6 +91,13 @@
   <!-- ── Shared version properties ─────────────────────────────────────────── -->
 
   <properties>
+    <!-- ── Links ──────────────────────────────────────────────────────────────
+         The organisation parent builds every link from instanto.repository.
+         Sarto's own modules take the parents below this one directly, so they
+         name Sarto's repository. A project in another repository names its own
+         in its root POM. -->
+    <instanto.repository>sarto</instanto.repository>
+
     <!-- ── POM suite version ──────────────────────────────────────────────────
          Single version for the entire reusable POM suite.
          To change the version for a release:

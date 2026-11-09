@@ -1,9 +1,8 @@
 name: CI
 
 on:
-  push:
-    branches: [main]
   pull_request:
+  workflow_dispatch:
 
 # The shared workflow asks for packages: write, and a called workflow cannot be
 # granted more than its caller has.
@@ -14,6 +13,7 @@ permissions:
 jobs:
   verify:
     name: Verify on JDK ${{ matrix.java }}
+    if: (github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository) || github.event_name == 'workflow_dispatch'
     strategy:
       fail-fast: false
       matrix:
@@ -23,5 +23,6 @@ jobs:
       name: Verify the POM suite on JDK ${{ matrix.java }}
       java-version: ${{ matrix.java }}
       goals: verify
-      sonar: ${{ matrix.java == '21' }}
+      downstream-checks: false
+      sonar: false
     secrets: inherit

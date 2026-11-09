@@ -20,5 +20,7 @@ jobs:
       # Every parent POM is published here; the monorepo no longer publishes copies of them.
       name: Publish the parent POMs
       goals: deploy
-      maven-args: -DskipTests
+      fast-deploy: true
+      downstream-checks: false
+      sonar: false
     secrets: inherit

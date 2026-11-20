@@ -25,7 +25,8 @@
                  profiles, with Swing and JavaFX variants; the JavaFX platform
                  profiles for each supported architecture; plugin management for
                  teavm-maven-plugin, javafx-maven-plugin and the jar plugin; the
-                 CDI bean index aggregation step.
+                 CDI bean index aggregation step; the step that compiles the
+                 application's worker scripts.
        Requires  The Sarto version properties from sarto-org-pom. An application
                  overrides app.jvm.main.class and app.teavm.main.class.
        Not here  A hosting target. Inherit sarto-app-browser-pom,
@@ -507,6 +508,28 @@
               </execution>
             </executions>
           </plugin>
+          <!--
+            One script per worker the application places its services in, from
+            the list Sarto's code generator writes. Each is compiled with this
+            build's TeaVM settings beside app.js and ends with the call that
+            starts it, so an application does not list its workers here.
+          -->
+          <plugin>
+            <groupId>io.instanto</groupId>
+            <artifactId>sarto-build-maven-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>compile-worker-scripts</id>
+                <phase>${app.teavm.phase}</phase>
+                <goals>
+                  <goal>compile-worker-scripts</goal>
+                </goals>
+                <configuration>
+                  <targetDirectory>${app.teavm.target.directory}</targetDirectory>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-resources-plugin</artifactId>
@@ -557,27 +580,6 @@
             <artifactId>maven-antrun-plugin</artifactId>
             <version>3.2.0</version>
             <executions>
-              <execution>
-                <id>auto-start-teavm-worker-bundles</id>
-                <phase>prepare-package</phase>
-                <goals>
-                  <goal>run</goal>
-                </goals>
-                <configuration>
-                  <skip>${teavm.skip}</skip>
-                  <target>
-                    <replaceregexp byline="false"
-                                   match="\s*$"
-                                   replace="&#10;;if (typeof main === &quot;function&quot;) { main(); } else { throw new Error(&quot;TeaVM worker bootstrap failed: main() not found&quot;); }&#10;">
-                      <fileset dir="${app.teavm.target.directory}">
-                        <include name="worker.js"/>
-                        <include name="*-worker.js"/>
-                        <exclude name="app.js"/>
-                      </fileset>
-                    </replaceregexp>
-                  </target>
-                </configuration>
-              </execution>
               <execution>
                 <id>zip-web-deploy-bundle</id>
                 <phase>package</phase>

@@ -96,7 +96,7 @@
          Sarto's own modules take the parents below this one directly, so they
          name Sarto's repository. A project in another repository names its own
          in its root POM. -->
-    <instanto.repository>sarto</instanto.repository>
+    <instanto.repository>sarto-framework</instanto.repository>
 
     <!-- ── POM suite version ──────────────────────────────────────────────────
          Single version for the entire reusable POM suite.
@@ -115,6 +115,7 @@
     <!-- Logging -->
     <slf4j.version>2.0.18</slf4j.version>
     <logback.version>1.5.38</logback.version>
+    <sarto-logging.version>0.1.0-SNAPSHOT</sarto-logging.version>
     <junit.version>6.1.2</junit.version>
     <!-- JUnit 4 is not covered by junit-bom. Keep it at the version junit-vintage-engine
          depends on, so vintage and the TeaVM JUnit runner agree on one JUnit 4. -->
@@ -124,6 +125,7 @@
     <sarto-cdi.version>0.1.0-SNAPSHOT</sarto-cdi.version>
     <sarto-onejar.version>0.1.0-SNAPSHOT</sarto-onejar.version>
     <sarto-async.version>0.1.0-SNAPSHOT</sarto-async.version>
+    <sarto-invoke.version>0.1.0-SNAPSHOT</sarto-invoke.version>
     <sarto-auth.version>0.1.0-SNAPSHOT</sarto-auth.version>
     <sarto-rest.version>0.1.0-SNAPSHOT</sarto-rest.version>
     <sarto-soap.version>0.1.0-SNAPSHOT</sarto-soap.version>
@@ -202,6 +204,16 @@
         <scope>import</scope>
       </dependency>
       <dependency>
+        <groupId>io.instanto</groupId>
+        <artifactId>sarto-invoke</artifactId>
+        <version>${sarto-invoke.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>io.instanto</groupId>
+        <artifactId>sarto-invoke-codegen</artifactId>
+        <version>${sarto-invoke.version}</version>
+      </dependency>
+      <dependency>
         <groupId>org.junit</groupId>
         <artifactId>junit-bom</artifactId>
         <version>${junit.version}</version>
@@ -218,6 +230,11 @@
         <groupId>org.slf4j</groupId>
         <artifactId>slf4j-api</artifactId>
         <version>${slf4j.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>io.instanto</groupId>
+        <artifactId>sarto-logging</artifactId>
+        <version>${sarto-logging.version}</version>
       </dependency>
       <dependency>
         <groupId>ch.qos.logback</groupId>

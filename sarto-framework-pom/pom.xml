@@ -62,7 +62,12 @@
             <dependency>
                 <groupId>io.instanto</groupId>
                 <artifactId>sarto-invoke</artifactId>
-                <version>${project.version}</version>
+                <version>${sarto-invoke.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.instanto</groupId>
+                <artifactId>sarto-invoke-codegen</artifactId>
+                <version>${sarto-invoke.version}</version>
             </dependency>
             <dependency>
                 <groupId>io.instanto</groupId>
@@ -273,7 +278,12 @@
             </dependency>
             <dependency>
                 <groupId>io.instanto</groupId>
-                <artifactId>sarto-framework-auth</artifactId>
+                <artifactId>sarto-security</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.instanto</groupId>
+                <artifactId>sarto-manifest</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
@@ -283,12 +293,12 @@
             </dependency>
             <dependency>
                 <groupId>io.instanto</groupId>
-                <artifactId>sarto-codec-json</artifactId>
+                <artifactId>sarto-rpc-codec-json</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>io.instanto</groupId>
-                <artifactId>sarto-codec-wire</artifactId>
+                <artifactId>sarto-rpc-codec-wire</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
@@ -319,12 +329,32 @@
             </dependency>
             <dependency>
                 <groupId>io.instanto</groupId>
-                <artifactId>sarto-rest-bindings</artifactId>
+                <artifactId>sarto-interop-rest</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>io.instanto</groupId>
-                <artifactId>sarto-soap-bindings</artifactId>
+                <artifactId>sarto-interop-soap</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.instanto</groupId>
+                <artifactId>sarto-interop-jaxws-metro</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.instanto</groupId>
+                <artifactId>sarto-interop-cf-grpc-codegen</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.instanto</groupId>
+                <artifactId>sarto-controlplane-service</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.instanto</groupId>
+                <artifactId>sarto-controlplane-client</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
@@ -455,12 +485,12 @@
             </dependency>
             <dependency>
                 <groupId>io.instanto</groupId>
-                <artifactId>sarto-cloudflare-runtime-adapter</artifactId>
+                <artifactId>sarto-host-cloudflare-runtime</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>io.instanto</groupId>
-                <artifactId>sarto-cloudflare-host</artifactId>
+                <artifactId>sarto-host-cloudflare</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
@@ -540,7 +570,12 @@
             </dependency>
             <dependency>
                 <groupId>io.instanto</groupId>
-                <artifactId>sarto-servlet</artifactId>
+                <artifactId>sarto-host-servlet</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.instanto</groupId>
+                <artifactId>sarto-host-tomcat</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
@@ -560,22 +595,17 @@
             </dependency>
             <dependency>
                 <groupId>io.instanto</groupId>
-                <artifactId>sarto-peer</artifactId>
+                <artifactId>sarto-host-spring-boot</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>io.instanto</groupId>
-                <artifactId>sarto-server-spring-boot</artifactId>
+                <artifactId>sarto-host-spring</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>io.instanto</groupId>
-                <artifactId>sarto-spring-host</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>io.instanto</groupId>
-                <artifactId>sarto-server-quarkus</artifactId>
+                <artifactId>sarto-host-quarkus</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>

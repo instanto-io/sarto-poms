@@ -37,6 +37,10 @@
       <artifactId>sarto-rpc</artifactId>
       <version>${revision}</version>
     </dependency>
+    <dependency>
+      <groupId>io.instanto</groupId>
+      <artifactId>sarto-logging</artifactId>
+    </dependency>
     <!-- Required for codegen-generated _ContractAdapter and GeneratedAppManifest -->
     <dependency>
       <groupId>io.instanto</groupId>
@@ -119,9 +123,9 @@
           <version>${teavm.version}</version>
           <dependencies>
             <dependency>
-              <groupId>org.teavm</groupId>
-              <artifactId>teavm-extras-slf4j</artifactId>
-              <version>${teavm.version}</version>
+              <groupId>io.instanto</groupId>
+              <artifactId>sarto-logging</artifactId>
+              <version>${sarto-logging.version}</version>
             </dependency>
             <dependency>
               <groupId>io.instanto</groupId>
@@ -258,9 +262,9 @@
           <version>${teavm.version}</version>
         </dependency>
         <dependency>
-          <groupId>org.teavm</groupId>
-          <artifactId>teavm-extras-slf4j</artifactId>
-          <version>${teavm.version}</version>
+          <groupId>io.instanto</groupId>
+          <artifactId>sarto-logging</artifactId>
+          <version>${sarto-logging.version}</version>
         </dependency>
       </dependencies>
       <build>

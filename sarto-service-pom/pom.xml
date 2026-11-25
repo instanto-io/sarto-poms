@@ -54,7 +54,7 @@
     </dependency>
     <dependency>
       <groupId>io.instanto</groupId>
-      <artifactId>sarto-app</artifactId>
+      <artifactId>sarto-manifest</artifactId>
       <scope>provided</scope>
     </dependency>
     <!-- Standard unit-of-work declaration; the final host supplies execution. -->

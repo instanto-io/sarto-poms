@@ -31,7 +31,7 @@
   <dependencies>
     <dependency>
       <groupId>io.instanto</groupId>
-      <artifactId>sarto-server-tomcat</artifactId>
+      <artifactId>sarto-host-tomcat</artifactId>
     </dependency>
     <dependency>
       <groupId>jakarta.servlet</groupId>

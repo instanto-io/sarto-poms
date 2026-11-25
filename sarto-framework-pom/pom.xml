@@ -288,11 +288,6 @@
             </dependency>
             <dependency>
                 <groupId>io.instanto</groupId>
-                <artifactId>sarto-app</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>io.instanto</groupId>
                 <artifactId>sarto-rpc-codec-json</artifactId>
                 <version>${project.version}</version>
             </dependency>
@@ -576,11 +571,6 @@
             <dependency>
                 <groupId>io.instanto</groupId>
                 <artifactId>sarto-host-tomcat</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>io.instanto</groupId>
-                <artifactId>sarto-server-tomcat</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>

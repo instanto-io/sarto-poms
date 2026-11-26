@@ -105,6 +105,11 @@
             </dependency>
             <dependency>
                 <groupId>io.instanto</groupId>
+                <artifactId>sarto-codec-runtime-xml</artifactId>
+                <version>${sarto-codec.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.instanto</groupId>
                 <artifactId>sarto-codec-codegen</artifactId>
                 <version>${sarto-codec.version}</version>
             </dependency>
@@ -284,16 +289,6 @@
             <dependency>
                 <groupId>io.instanto</groupId>
                 <artifactId>sarto-manifest</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>io.instanto</groupId>
-                <artifactId>sarto-rpc-codec-json</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>io.instanto</groupId>
-                <artifactId>sarto-rpc-codec-wire</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
